@@ -1,0 +1,22 @@
+<% if flash[:notice] %>
+
+$('#new_newsletter').after('<div class="notice row"><%= flash[:notice] %></div>');
+$('#errors').remove();
+$('#new_newsletter').remove();
+$('.notice').click(function(){
+    $(this).remove();
+});
+
+<% end %>
+
+<% if @newsletter.errors.any? %>
+
+$('#errors').remove();
+$('#newsletter_email').after('<div class="errors row" id="errors"><% @newsletter.errors.each do |attr,msg| %><%= msg %><br><% end %></div>');
+var newsletterformwidth = $('#new_newsletter').width();
+$('.errors').width(newsletterformwidth);
+$('.errors').click(function(){
+    $(this).remove();
+});
+
+<% end %>
